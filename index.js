@@ -24,7 +24,7 @@ express()
           origins: [zip_origen],
           destinations: [zip_dest],
           units:'metric',
-          key: process.env.GOOGLE_MAPS_API_KEY //'AIzaSyCOXsIcGPD75cf41G5R-UE7A2YgZYEtI5E'
+          key: process.env.GOOGLE_MAPS_API_KEY 
         },
         timeout: 1000 // milliseconds
       }).then(r => {
@@ -33,6 +33,7 @@ express()
         res.send( JSON.stringify(finalValue));
       }).catch(e => {
         console.log(e);
+        res.send("Not able to connect to API");
       });
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
