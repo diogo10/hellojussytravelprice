@@ -5,6 +5,25 @@ const path = require('path')
 const PORT = process.env.PORT || 3000
 const client = new Client({});
 
+
+function calculateValueFor(obj) {
+  var value = Number(obj);
+  var result = 0;
+  if(value <= 0 && value <= 2) {
+    result = 0; 
+  } else if(value < 2 && value <= 6) {
+    result = 3;
+  }else if(value < 6 && value <= 10) {
+    result = 5;
+  }else if(value < 10 && value <= 30) {
+    result = 8;
+  }else {
+    result = 12;
+  }
+
+  return result; 
+}
+
 //http://127.0.0.1:5000
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -28,7 +47,8 @@ express()
         },
         timeout: 1000 // milliseconds
       }).then(r => {
-        const finalValue = r.data.rows[0].elements[0].distance;
+        var finalValue = r.data.rows[0].elements[0].distance;
+        finalValue.cost = calculateValueFor(finalValue.value)
         console.log(finalValue);
         res.send( JSON.stringify(finalValue));
       }).catch(e => {
