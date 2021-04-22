@@ -50,6 +50,8 @@ express()
         timeout: 1000 // milliseconds
       }).then(r => {
         var finalValue = r.data.rows[0].elements[0].distance;
+        console.log();
+        console.log("google finalValue: " + finalValue.value);
         finalValue.cost = calculateValueFor(finalValue.value)
         console.log(finalValue);
         res.send( JSON.stringify(finalValue));
