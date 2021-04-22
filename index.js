@@ -9,15 +9,15 @@ const client = new Client({});
 function calculateValueFor(obj) {
   var value = Number(obj);
   var result = 0;
-  if(value <= 0 && value < 5) {
+  if(value > 0 && value < 5000) {
     result = 0; 
-  } else if(value >= 4 && value < 8) {
+  } else if(value > 5000 && value <= 8000) {
     result = 4;
-  }else if(value >= 8 && value < 10) {
+  }else if(value > 8000 && value <= 10000) {
     result = 5;
-  }else if(value >= 10 && value < 15) {
+  }else if(value > 10000 && value <= 15000) {
     result = 6;
-  }else if(value >= 15 && value < 30) {
+  }else if(value > 15000 && value <= 30000) {
     result = 8;
   }else {
     result = 12;
@@ -26,7 +26,6 @@ function calculateValueFor(obj) {
   return result; 
 }
 
-//http://127.0.0.1:5000
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -53,7 +52,6 @@ express()
         console.log();
         console.log("google finalValue: " + finalValue.value);
         finalValue.cost = calculateValueFor(finalValue.value)
-        console.log(finalValue);
         res.send( JSON.stringify(finalValue));
       }).catch(e => {
         console.log(e);
