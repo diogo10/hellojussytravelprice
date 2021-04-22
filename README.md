@@ -9,9 +9,10 @@ https://pacific-bastion-42551.herokuapp.com/?zip_origen=2955-028&zip_dest=1350-0
 
 *Links*
 
-- https://github.com/googlemaps/google-maps-services-js   
+- https://github.com/googlemaps/google-maps-services-js 
+- https://devcenter.heroku.com/articles/git  
 
 
 *Push*
 
-git push heroku main
+git push heroku master
