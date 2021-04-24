@@ -34,10 +34,11 @@ express()
     
     let zip_origen = req.query.zip_origen;
     let zip_dest = req.query.zip_dest;
-
-    console.log('loading google api: ' + zip_origen);
-    console.log();
     console.log('loading google api: ' + zip_dest);
+
+    if(!zip_dest.includes("-")) {
+      zip_dest = formatZip(zip_dest);
+    }
 
     client.distancematrix({
         params: {
@@ -48,14 +49,30 @@ express()
         },
         timeout: 1000 // milliseconds
       }).then(r => {
-        var finalValue = r.data.rows[0].elements[0].distance;
-        console.log();
-        console.log("google finalValue: " + finalValue.value);
-        finalValue.cost = calculateValueFor(finalValue.value)
-        res.send( JSON.stringify(finalValue));
+
+        try {
+              var finalValue = r.data.rows[0].elements[0].distance;
+              finalValue.cost = calculateValueFor(finalValue.value);
+              console.log("google finalValue: " + finalValue);
+              finalValue.status = "OK";
+              res.send(JSON.stringify(finalValue));
+        } catch (error) {
+          console.error(error);
+          res.send({ "status":"NOK", "message":error.message});
+        }
+
+       
+
       }).catch(e => {
         console.log(e);
-        res.send("Not able to connect to API");
+        res.send({ "status":"NOK", "message":e.message});
       });
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
+
+function formatZip(value) {
+  var temp1 = value.substring(0, 4);
+  var temp2 = value.substring(4,7);
+  return temp1 + "-" + temp2;
+}
