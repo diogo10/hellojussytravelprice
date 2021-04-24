@@ -50,22 +50,22 @@ express()
         timeout: 1000 // milliseconds
       }).then(r => {
 
-        try {
-              var finalValue = r.data.rows[0].elements[0].distance;
-              finalValue.cost = calculateValueFor(finalValue.value);
-              console.log("google finalValue: " + finalValue);
-              finalValue.status = "OK";
-              res.send(JSON.stringify(finalValue));
-        } catch (error) {
-          console.error(error);
-          res.send({ "status":"NOK", "message":error.message});
-        }
+          try {
+                var finalValue = r.data.rows[0].elements[0].distance;
+                finalValue.cost = calculateValueFor(finalValue.value);
+                finalValue.status = "OK";
+                var myResponse = JSON.stringify(finalValue);
+                console.log(myResponse);
+                res.send(myResponse);
+          } catch (error) {
+            console.log(error);
+            handlerError(res, error);
+          }
 
-       
 
       }).catch(e => {
         console.log(e);
-        res.send({ "status":"NOK", "message":e.message});
+        handlerError(res, error);
       });
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
@@ -75,4 +75,8 @@ function formatZip(value) {
   var temp1 = value.substring(0, 4);
   var temp2 = value.substring(4,7);
   return temp1 + "-" + temp2;
+}
+
+function handlerError(res, error) {
+  res.send(JSON.stringify({ 'status': 'NOK','message': error.message}));
 }
