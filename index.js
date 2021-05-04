@@ -12,12 +12,14 @@ function calculateValueFor(obj) {
   if(value > 0 && value < 5000) {
     result = 0; 
   } else if(value > 5000 && value <= 8000) {
-    result = 4;
+    result = 2;
   }else if(value > 8000 && value <= 10000) {
-    result = 5;
-  }else if(value > 10000 && value <= 15000) {
-    result = 6;
+    result = 3;
+  }else if(value > 10000 && value <= 19000) {
+    result = 4;
   }else if(value > 15000 && value <= 30000) {
+    result = 6;
+  }else if(value > 30000 && value <= 42000) {
     result = 8;
   }else {
     result = 12;
@@ -34,7 +36,8 @@ express()
     
     let zip_origen = req.query.zip_origen;
     let zip_dest = req.query.zip_dest;
-    console.log('loading google api: ' + zip_dest);
+    //let city_dest = req.query.city;
+    //let state_dest = req.query.state;
 
     if(!zip_dest.includes("-")) {
       zip_dest = formatZip(zip_dest);
