@@ -45,8 +45,8 @@ express()
 
     client.distancematrix({
         params: {
-          origins: [zip_origen],
-          destinations: [zip_dest],
+          origins: [zip_origen + ", Lisbon, Portugal"],
+          destinations: [zip_dest + ", Lisbon, Portugal"],
           units:'metric',
           key: process.env.GOOGLE_MAPS_API_KEY 
         },
