@@ -14,8 +14,12 @@ express()
     
     let zip_origen = req.query.zip_origen;
     let zip_dest = req.query.zip_dest;
-    //let city_dest = req.query.city;
-    //let state_dest = req.query.state;
+
+    if(zip_dest == '' || zip_dest === undefined) {
+      console.log("zip_dest is empty or  undefined");
+      res.send(JSON.stringify({ 'status': 'NOK','message': "no dest"}));
+      return
+    }
 
     if(!zip_dest.includes("-")) {
       zip_dest = formatZip(zip_dest);
