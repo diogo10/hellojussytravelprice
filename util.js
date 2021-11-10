@@ -1,8 +1,10 @@
 function calculateValueFor(obj) {
     var value = Number(obj);
     var result = 0;
-    if(value > 0 && value <= 5000) {
-      result = 2; 
+    if(value > 0 && value <= 3000) {
+      result = 1; 
+    } else if(value > 3000 && value <= 5000) {
+      result = 1.5; 
     } else if(value > 5000 && value <= 8000) {
       result = 2;
     }else if(value > 8000 && value <= 10000) {
