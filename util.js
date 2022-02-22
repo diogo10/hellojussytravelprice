@@ -16,7 +16,7 @@ function calculateValueFor(obj) {
     }else if(value > 30000 && value <= 42000) {
       result = 8;
     }else {
-      result = 8;
+      result = 12;
     }
   
     return result; 
