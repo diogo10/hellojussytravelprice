@@ -14,9 +14,9 @@ function calculateValueFor(obj) {
     }else if(value > 19000 && value <= 30000) {
       result = 5;
     }else if(value > 30000 && value <= 42000) {
-      result = 5;
+      result = 8;
     }else {
-      result = 5;
+      result = 8;
     }
   
     return result; 
